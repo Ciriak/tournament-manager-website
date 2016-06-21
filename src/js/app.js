@@ -1,4 +1,4 @@
-var app = angular.module('projet2', [
+var app = angular.module('tournament', [
 'ui.router',
 'ui.bootstrap',
 'LocalStorageModule'
@@ -128,9 +128,6 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
 
   $rootScope.apiAddress = apiAddress;
 
-  $rootScope.access_token = "";
-  $rootScope.logged = false;
-
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     // called when a state change
   });
@@ -138,52 +135,9 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
     // called when a state has changed
   });
 
-  //
-  //  Login checker
-  //
-
-  var at = localStorageService.get("access_token");
-  if(at){
-    console.log("Login...");
-    $rootScope.access_token = at;
-    $rootScope.logged = true;
-  }
-
-  $rootScope.logout = function(){
-    if(confirm("Voulez-vous vraiment vous déconnecter ?")){
-      $rootScope.access_token = "";
-      $rootScope.logged = false;
-      localStorageService.remove("access_token");
-      location.reload();
-    }
-  }
-
-
-if($rootScope.logged){
-  var apiUri = $rootScope.apiAddress+'/me'+'?access_token='+$rootScope.access_token;
-  $http({
-    method: 'GET',
-    url: apiUri
-  }).then(function successCallback(response) {
-    console.log(response);
-    $rootScope.me = response.data;
-    }, function errorCallback(response) {
-      console.log(response);
-      if($rootScope.access_token){
-        $state.go('signup.endingSignup');
-      }
-    });
-}
-
-
-  $(".menu-btn").click(function(){
-    $(this).toggleClass("opened");
-    $(".menu").toggleClass("opened");
-  });
-
-   $(".menu li a").click(function(){
-    $(".menu-btn").removeClass("opened");
-    $(".menu").removeClass("opened");
-  });
+  //initialize Bootstrap components
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
 }]);
