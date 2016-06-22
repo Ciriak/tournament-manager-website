@@ -6,6 +6,15 @@ body{
   margin-bottom: 0px;
 }
 
+.marged{
+  margin-top:50px;
+}
+
+footer{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
 @media (min-width: 768px ) {
   .row {
       position: relative;

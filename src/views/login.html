@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="panel panel-default col-md-4 col-md-offset-1 marged">
+    <form class="panel-body" ng-submit="signup.send()">
+      <h4>Créer un compte</h4>
+
+      <div class="alert alert-danger" role="alert" ng-show="signup.error">{{signup.error}}</div>
+
+      <div class="form-group">
+        <label>Entrez votre adresse mail</label>
+        <input type="email" placeholder="" class="form-control" ng-model="signup.email" ng-disabled="signup.processing">
+      </div>
+
+      <div class="form-group">
+        <label>Choisissez un pseudonyme</label>
+        <input type="text" placeholder="" class="form-control" ng-model="signup.nickname" ng-disabled="signup.processing">
+      </div>
+
+      <div class="form-group">
+        <label>Choisissez un mot de passe</label>
+        <input type="password" placeholder="******" class="form-control" ng-model="signup.password" ng-disabled="signup.processing">
+      </div>
+
+      <div class="form-group">
+        <label>Retappez-le</label>
+        <input type="password" placeholder="******" class="form-control" ng-model="signup.password_verif" ng-disabled="signup.processing">
+      </div>
+
+      <div class="form-group text-right">
+        <button class="btn btn-primary" type="submit" ng-disabled="signup.processing">{{signup.buttonLabel}}</button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="panel panel-default col-md-4 col-md-offset-1 marged">
+    <form class="panel-body" ng-submit="login.send()">
+      <h4>Connexion</h4>
+
+      <div class="alert alert-danger" role="alert" ng-show="login.error">{{login.error}}</div>
+
+      <div class="form-group">
+        <label>Adresse mail d'inscription</label>
+        <input type="email" placeholder="" class="form-control" autofocus="true" ng-model="login.email" ng-disabled="login.processing">
+      </div>
+
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input type="password" placeholder="" class="form-control" ng-model="login.password" ng-disabled="login.processing">
+      </div>
+
+      <div class="form-group text-right">
+        <button class="btn btn-primary" type="submit" ng-disabled="login.processing">{{login.buttonLabel}}</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
