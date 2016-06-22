@@ -22,14 +22,11 @@ app.all('/api/*', function (req, res) {
   console.log("-- API Call --");
   console.log(req.method+" on "+apiIndex+reqPath);
 
-  //replace the calling uri
-  //req.headers.host = apiIndex+reqPath;
-
 
   var options = {
     url : apiIndex+reqPath,
     method: req.method,
-    formData: JSON.stringify(req.body)
+    form: req.body
   }
 
   if(req.query.access_token){
