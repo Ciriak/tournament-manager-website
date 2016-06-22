@@ -29,9 +29,14 @@ app.all('/api/*', function (req, res) {
   var options = {
     url : apiIndex+reqPath,
     method: req.method,
-    formData: req.body
+    formData: req.body,
+    json: true
   }
 
+  //prevent invalid type error
+  if(typeof(options) == "object"){
+    options = JSON.stringify(options);
+  }
 
     if(req.query.access_token){
       console.log("Authentification with token : ");
@@ -42,6 +47,10 @@ app.all('/api/*', function (req, res) {
     }
 
   request(options,function(req,response,body){
+    if(!response){
+      res.status(404).send();
+      return;
+    }
     console.log("-> Status "+response.statusCode);
     console.log("--------------");
     console.log("Form-data");
