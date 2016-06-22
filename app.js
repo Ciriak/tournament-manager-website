@@ -6,7 +6,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 
 //edit the api location here
-var apiIndex = "http://colab.laouiti.me/app_dev.php";
+var apiIndex = "http://127.0.0.1/tournamentmanager/web/app_dev.php";
 
 app.use(express.static('public'));
 // parse application/x-www-form-urlencoded
@@ -29,24 +29,19 @@ app.all('/api/*', function (req, res) {
   var options = {
     url : apiIndex+reqPath,
     method: req.method,
-    formData: req.body,
-    json: true
+    formData: JSON.stringify(req.body)
   }
 
-  //prevent invalid type error
-  if(typeof(options) == "object"){
-    options = JSON.stringify(options);
+  if(req.query.access_token){
+    console.log("Authentification with token : ");
+    console.log(req.query.access_token);
+    options.headers = {};
+    options.headers['Authorization'] = "Bearer "+req.query.access_token;
+    delete req.query.access_token;
   }
-
-    if(req.query.access_token){
-      console.log("Authentification with token : ");
-      console.log(req.query.access_token);
-      options.headers = {};
-      options.headers['Authorization'] = "Bearer "+req.query.access_token;
-      delete req.query.access_token;
-    }
 
   request(options,function(req,response,body){
+
     if(!response){
       res.status(404).send();
       return;
