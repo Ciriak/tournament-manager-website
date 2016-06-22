@@ -31,12 +31,28 @@
             <li><a href="#">Link</a></li>
           </ul>
 
-          <div class="navbar-right">
+          <div class="navbar-right" ng-hide="me">
               <a ui-sref="login" class="btn btn-primary btn-sm navbar-btn" type="button">Connexion</a>
               <a ui-sref="login">
                 <img src="img/default_avatar.png" alt="Avatar" class="img-rounded" style="width:38px; height:38px;"/>
               </a>
           </div>
+
+          <ul class="nav navbar-right" ng-show="me">
+            <li class="dropdown">
+              <a ui-sref="profil" class="dropdown-toggle" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                {{me.nickname}} <span class="caret"></span>
+                <img src="img/default_avatar.png" alt="{{me.nickname}}" class="img-rounded" style="width:40px; height:40px;" />
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Editer mon profil</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a ng-click="logout()">Déconnexion</a></li>
+              </ul>
+            </li>
+          </ul>
 
         </div>
       </div>
@@ -67,6 +83,7 @@
     <script src="/dep/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/dep/flat-ui/dist/js/flat-ui.min.js"></script>
     <script src="/dep/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="/dep/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
     <script src="/dep/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="/js/script.min.js"></script>
   </body>
