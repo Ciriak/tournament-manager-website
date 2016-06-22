@@ -46,7 +46,6 @@ app.all('/api/*', function (req, res) {
     console.log("-> Status "+response.statusCode);
     console.log("--------------");
     console.log("Form-data");
-    console.log(options.formData);
     res.status(response.statusCode).send(body);
   })
 });

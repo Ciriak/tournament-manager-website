@@ -135,6 +135,37 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
     // called when a state has changed
   });
 
+  $rootScope.logout = function(){
+    delete $rootScope.access_token;
+    location.reload();
+  }
+
+  //check if the user is logged in and define the current one
+  if(localStorageService.get("access_token")){
+
+    console.log("Token is defined ... login the user...");
+
+    $rootScope.access_token = localStorageService.get("access_token");
+    $http({
+      method: 'GET',
+      url: $rootScope.apiAddress+'/me?access_token=' + $rootScope.access_token
+    }).then(function successCallback(r) {
+      console.log("... logged in successfully !");
+      //token valid and user connected
+
+      $rootScope.me = r.data;
+
+    }, function errorCallback(r) {
+
+        console.log("... Invalid token !");
+
+      //token is invalid, remove the token and logout the user
+
+      localStorageService.remove("access_token");
+      $rootScope.logout();
+    });
+  }
+
   //initialize Bootstrap components
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()

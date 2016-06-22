@@ -9,7 +9,8 @@ app.controller('loginCtrl', ['$scope', '$http','$rootScope','$location','$state'
   $scope.signup = {
     processing : false,
     buttonLabel : "Créer mon compte",
-    error : false
+    error : false,
+    success : false
   }
 
   $scope.signup.send = function(){
@@ -27,6 +28,7 @@ app.controller('loginCtrl', ['$scope', '$http','$rootScope','$location','$state'
       url: $rootScope.apiAddress+'/login_check',
       data : $scope.login
     }).then(function successCallback(r) {
+      localStorageService.set("access_token", r.data.token);
       $state.go('main');
       location.reload();
     }, function errorCallback(r) {
@@ -46,9 +48,10 @@ app.controller('loginCtrl', ['$scope', '$http','$rootScope','$location','$state'
       url: $rootScope.apiAddress+'/accounts',
       data : $scope.signup
     }).then(function successCallback(r) {
-      location.reload();
+      $rootScope.access_token = r.data.token;
+      localStorageService.set("access_token", r.data.token);
+      $scope.signup.success = true;
     }, function errorCallback(r) {
-      console.log(r);
       if(r.data.error.exception[0].message){
         $scope.signup.error = r.data.error.exception[0].message;
       }
