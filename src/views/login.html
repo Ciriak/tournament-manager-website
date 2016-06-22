@@ -22,7 +22,7 @@
 
       <div class="form-group">
         <label>Retappez-le</label>
-        <input type="password" placeholder="******" class="form-control" ng-model="signup.password_verif" ng-disabled="signup.processing">
+        <input type="password" placeholder="******" class="form-control" ng-model="signup.password_confirmation" ng-disabled="signup.processing">
       </div>
 
       <div class="form-group text-right">
@@ -40,12 +40,12 @@
 
       <div class="form-group">
         <label>Adresse mail d'inscription</label>
-        <input type="email" placeholder="" class="form-control" autofocus="true" ng-model="login.email" ng-disabled="login.processing">
+        <input type="email" placeholder="" class="form-control" autofocus="true" ng-model="login._username" ng-disabled="login.processing">
       </div>
 
       <div class="form-group">
         <label>Mot de passe</label>
-        <input type="password" placeholder="" class="form-control" ng-model="login.password" ng-disabled="login.processing">
+        <input type="password" placeholder="" class="form-control" ng-model="login._password" ng-disabled="login.processing">
       </div>
 
       <div class="form-group text-right">

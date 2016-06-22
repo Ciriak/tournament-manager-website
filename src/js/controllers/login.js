@@ -43,13 +43,18 @@ app.controller('loginCtrl', ['$scope', '$http','$rootScope','$location','$state'
     this.buttonLabel = "Patientez...";
     $http({
       method: 'POST',
-      url: $rootScope.apiAddress+'/signup_check',
+      url: $rootScope.apiAddress+'/accounts',
       data : $scope.signup
     }).then(function successCallback(r) {
-      $state.go('main');
       location.reload();
     }, function errorCallback(r) {
-      $scope.signup.error = "Echec de l'inscription";
+      console.log(r);
+      if(r.data.error.exception[0].message){
+        $scope.signup.error = r.data.error.exception[0].message;
+      }
+      else{
+        $scope.signup.error = "Echec de l'inscription";
+      }
       $scope.signup.processing = false;
       $scope.signup.buttonLabel = oldLabel;
     });
