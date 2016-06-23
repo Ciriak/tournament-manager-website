@@ -35,20 +35,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "views/login.html",
       controller : "loginCtrl"
     })
-    .state('organizations', {
-      url: "/organizations",
-      templateUrl: "views/organizations/list.html",
-      controller : "organizationCtrl"
-    })
-    .state('users', {
-      url: "/users",
-      templateUrl: "views/users.html",
-      controller : "accountCtrl"
+    .state('profil', {
+      url: "/profil/{id:int}",
+      templateUrl: "views/profil/profil.html",
+      controller : "profilCtrl"
     })
     .state('editProfil', {
       url: "/profile/edit",
-      templateUrl: "views/edit_profil.html",
-      controller : "accountCtrl"
+      templateUrl: "views/profil/edit.html",
+      controller : "editProfilCtrl"
     })
     .state('contact', {
       url: "/contact",
