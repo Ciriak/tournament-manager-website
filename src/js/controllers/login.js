@@ -30,7 +30,9 @@ app.controller('loginCtrl', ['$scope', '$http','$rootScope','$location','$state'
     }).then(function successCallback(r) {
       localStorageService.set("access_token", r.data.token);
       $state.go('main');
-      location.reload();
+      setTimeout(function(){
+        location.reload();
+      },500);
     }, function errorCallback(r) {
       $scope.login.error = "Echec de la connexion";
       $scope.login.processing = false;

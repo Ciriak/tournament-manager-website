@@ -40,7 +40,7 @@
 
           <ul class="nav navbar-right" ng-show="me">
             <li class="dropdown">
-              <a ui-sref="profil" class="dropdown-toggle" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <a ui-sref="profil({id:me.id})" class="dropdown-toggle" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 {{me.nickname}} <span class="caret"></span>
                 <img src="img/default_avatar.png" alt="{{me.nickname}}" class="img-rounded" style="width:40px; height:40px;" />
               </a>

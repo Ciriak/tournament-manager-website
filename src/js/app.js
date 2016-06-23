@@ -131,9 +131,12 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
   });
 
   $rootScope.logout = function(){
+    localStorageService.remove("access_token");
     delete $rootScope.access_token;
     delete $rootScope.me;
-    location.reload();
+    setTimeout(function(){
+      location.reload();
+    },500);
   }
 
   //check if the user is logged in and define the current one

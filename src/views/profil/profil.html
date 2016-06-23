@@ -1,17 +1,27 @@
 <div class="container-fluid" style="background-image:url('http://lorempixel.com/1200/500'); background-size:cover;">
-  <div class="col-md-3">
-    <img src="img/default_avatar.png" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" style="height:150px;" />
+  <div class="container">
+    <div class="col-md-3">
+      <img src="img/default_avatar.png" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" style="height:150px;" />
+    </div>
   </div>
+
 </div>
 
 <div class="container">
-  <div class="col-md-6">
-    Description
+  <div class="col-md-8">
+    <h4>Overview pour {{profil.nickname}}</h4>
+    <a ui-sref="editProfil" class="btn btn-primary btn-sm" ng-show="profil.id === me.id"><i class="mdi mdi-pencil"></i></a>
+    <p>{{profil.nickname}} <span ng-if="profil.name">({{profil.name}})</span></p>
+    <p>{{profil.country}}</p>
+
   </div>
-  <div class="col-md-6">
-    Stats
+  <div class="col-md-4 panel panel-default">
+    <div class="panel-body">
+      <h4>Statistiques</h4>
+    </div>
   </div>
-  <div class="row">
-    Hello world
+
+  <div class="col-md-12">
+    <h4>Commentaires</h4>
   </div>
 </div>
