@@ -132,6 +132,7 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
 
   $rootScope.logout = function(){
     delete $rootScope.access_token;
+    delete $rootScope.me;
     location.reload();
   }
 

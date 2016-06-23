@@ -52,7 +52,7 @@ app.controller('loginCtrl', ['$scope', '$http','$rootScope','$location','$state'
       localStorageService.set("access_token", r.data.token);
       $scope.signup.success = true;
     }, function errorCallback(r) {
-      if(r.data.error.exception[0].message){
+      if(r.data.error){
         $scope.signup.error = r.data.error.exception[0].message;
       }
       else{
