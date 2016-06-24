@@ -153,6 +153,9 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
       //token valid and user connected
 
       $rootScope.me = r.data;
+      $rootScope.me.birth_date_o = $rootScope.me.birth_date;
+      $rootScope.me.birth_date = new Date(moment($rootScope.me.birth_date).format("YYYY-MM-DD"));
+      console.log($rootScope.me);
 
     }, function errorCallback(r) {
 
