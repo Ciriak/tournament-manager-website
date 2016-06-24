@@ -13,12 +13,6 @@ app.controller('loginCtrl', ['$scope', '$http','$rootScope','$location','$state'
     success : false
   }
 
-  $scope.signup.send = function(){
-    var oldLabel = this.buttonLabel;
-    this.processing = true;
-    this.buttonLabel = "Patientez...";
-  };
-
   $scope.login.send = function(){
     var oldLabel = this.buttonLabel;
     this.processing = true;
