@@ -16,81 +16,51 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "views/index.html",
       reload:true
     })
-    .state('signup', {
-      url: "/signup",
-      templateUrl: "views/signup.html",
-      controller : "signupCtrl"
-    })
-    .state('signup.endingSignup', {
-      url: "/ending/:token",
-      templateUrl: "views/ending_signup.html"
-    })
-    .state('resetPassword', {
-      url: "/reset_password",
-      templateUrl: "views/reset_password.html",
-      controller : "resetPasswordCtrl"
-    })
     .state('login', {
       url: "/login",
       templateUrl: "views/login.html",
       controller : "loginCtrl"
+    })
+    .state('tournament', {
+      url: "/tournament/{id:int}",
+      templateUrl: "views/tournament/tournament.html",
+      controller : "tournamentCtrl"
+    })
+    .state('tournamentList', {
+      url: "/tournament/list",
+      templateUrl: "views/tournament/list.html",
+      controller : "tournamentListCtrl"
+    })
+    .state('tournamentProfil', {
+      url: "/tournament/edit",
+      templateUrl: "views/tournament/edit.html",
+      controller : "edittournamentCtrl"
     })
     .state('profil', {
       url: "/profil/{id:int}",
       templateUrl: "views/profil/profil.html",
       controller : "profilCtrl"
     })
+    .state('profilList', {
+      url: "/profil/list",
+      templateUrl: "views/profil/list.html",
+      controller : "profilListCtrl"
+    })
     .state('editProfil', {
       url: "/profile/edit",
       templateUrl: "views/profil/edit.html",
       controller : "editProfilCtrl"
-    })
-    .state('contact', {
-      url: "/contact",
-      templateUrl: "views/contact.html",
-      controller : "contactCtrl"
-    })
-    .state('projects', {
-      url: "/projects",
-      templateUrl: "views/projects/list.html",
-      controller : "projectCtrl"
-    })
-    .state('projects.item', {
-      url: "/{id:int}",
-      templateUrl: "views/projects/project.html",
-    })
-    .state('projects.item.promise', {
-      url: "/{promiseId:int}",
-      templateUrl: "views/projects/promise.html",
-    })
-    .state('newProject', {
-      url: "/new_project",
-      templateUrl: "views/projects/new.html",
-      controller : "projectCtrl"
-    })
-    /*.state('project', {
-      url: "/project",
-      templateUrl: "views/projects/project.html",
-    })*/
-    .state('announcements', {
-      url: "/announcements",
-      templateUrl: "views/announcements/list.html",
-      controller : "announcementCtrl"
-    })
-    .state('announcements.item', {
-      url: "/{id:int}",
-      templateUrl: "views/announcements/announcement.html",
-    })
-    .state('newAnnouncement', {
-      url: "/new_announcement",
-      templateUrl: "views/announcements/new.html",
-      controller : "announcementCtrl"
-    })
-    .state('search', {
-      url: "/search/:query",
-      templateUrl: "views/search.html",
-      controller : "searchCtrl"
     });
+});
+
+app.directive('customOnChange', function() {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var onChangeHandler = scope.$eval(attrs.customOnChange);
+      element.bind('change', onChangeHandler);
+    }
+  };
 });
 
 app.directive("fileread", [function () {
