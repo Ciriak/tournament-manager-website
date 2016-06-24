@@ -1,7 +1,7 @@
-<div class="container-fluid" style="background-image:url('http://lorempixel.com/1200/500'); background-size:cover;">
+<div ng-click="profil.setFile('banner')" class="container-fluid" style="background-image:url('http://lorempixel.com/1200/500'); background-size:cover;">
   <div class="container">
     <div class="col-md-3">
-      <img src="img/default_avatar.png" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" style="height:150px;" />
+      <img ng-click="profil.setFile('image')" src="img/default_avatar.png" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" style="height:150px;" />
     </div>
   </div>
 </div>
@@ -53,6 +53,13 @@
       </div>
 
     </form>
+
+    <input id="profil-image" class="hidden" ng-model="profil.image"
+       type="file" custom-on-change="profil.sendFile('image')" accept="image/*" />
+
+    <input id="profil-banner" class="hidden" ng-model="profil.banner"
+          type="file" custom-on-change="profil.sendFile('banner')" accept="image/*" />
+
   </div>
 
 </div>

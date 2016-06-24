@@ -46,4 +46,22 @@ app.controller('editProfilCtrl', ['$scope', '$http','$rootScope','$location','$s
     });
   };
 
+  $scope.profil.setFile = function(type){
+    $("#profil-"+type).trigger('click');
+  };
+
+  $scope.profil.sendFile = function(type){
+    console.log("Sending "+type+"...");
+    $http({
+      method: 'POST',
+      url: $rootScope.apiAddress+'/me/'+type+'?access_token='+$rootScope.access_token,
+      data : $scope.profil
+    }).then(function successCallback(r) {
+      console.log(r);
+      //$scope.profil.image = false;
+    }, function errorCallback(r) {
+      console.log(r);
+    });
+  };
+
 }]);
