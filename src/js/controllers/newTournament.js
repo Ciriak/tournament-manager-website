@@ -1,8 +1,15 @@
 app.controller('newTournamentCtrl', ['$scope', '$http','$rootScope','$location','$state','localStorageService', function($scope, $http,$rootScope,$location,$state,localStorageService)
 {
+
+  //if not logged in, go to login page
+  if(!$rootScope.me){
+    $state.go('login');
+    return;
+  }
+
   $scope.tournament = {
     processing : false,
-    buttonLabel : "Créer mon compte",
+    buttonLabel : "Créer le tournoi",
     error : false,
     success : false
   }
@@ -13,7 +20,7 @@ app.controller('newTournamentCtrl', ['$scope', '$http','$rootScope','$location',
     this.buttonLabel = "Patientez...";
     $http({
       method: 'POST',
-      url: $rootScope.apiAddress+'/tournaments',
+      url: $rootScope.apiAddress+'/tournaments?access_token='+$rootScope.access_token,
       data : $scope.tournament
     }).then(function successCallback(r) {
       $scope.tournament.success = true;
