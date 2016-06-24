@@ -31,6 +31,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "views/tournament/list.html",
       controller : "tournamentListCtrl"
     })
+    .state('tournamentNew', {
+      url: "/tournament/new",
+      templateUrl: "views/tournament/new.html",
+      controller : "newTournamentCtrl"
+    })
     .state('tournamentProfil', {
       url: "/tournament/edit",
       templateUrl: "views/tournament/edit.html",
