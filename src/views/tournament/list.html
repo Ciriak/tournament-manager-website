@@ -2,15 +2,18 @@
   <h4>Liste des tournois</h4>
   <div class="col-md-8">
     <table class="table table-hover">
-      <tr>
+      <tr ng-repeat="tournament in tournaments">
         <td>
-          YOLO
+          {{tournament.name}}
         </td>
         <td>
-          YOLO
+          {{tournament.game}}
         </td>
         <td>
-          YOLO
+          {{tournament.description}}
+        </td>
+        <td>
+          <a ui-sref="tournament({id:tournament.id})" class="btn btn-primary btn-sm">Voir <i class="mdi mdi-content-paste"></i></a>
         </td>
       </tr>
     </table>
