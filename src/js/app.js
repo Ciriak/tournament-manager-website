@@ -137,9 +137,6 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
         console.log("... Invalid token !");
 
       //token is invalid, remove the token and logout the user
-
-      localStorageService.remove("access_token");
-      $rootScope.logout();
     });
   }
 
