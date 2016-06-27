@@ -4,7 +4,7 @@
       <h2>{{tournament.name}}</h2>
     </div>
     <div class="col-md-6 text-right">
-      <button class="btn btn-primary btn-lg" ng-click="tournamentOpt.join()" ng-disabled="tournamentOpt.processing"><i class="mdi mdi-content-paste"></i> {{tournamentOpt.buttonLabel}}</button>
+      <button ng-show="tournamentOpt.canSuscribe" class="btn btn-primary btn-lg" ng-click="tournamentOpt.join()" ng-disabled="tournamentOpt.processing"><i class="mdi mdi-content-paste"></i> {{tournamentOpt.buttonLabel}}</button>
     </div>
   </div>
 
@@ -19,14 +19,18 @@
   </div>
   <div class="col-md-4 panel panel-default">
     <div class="panel-body">
+      <span class="label label-default pull-right">{{tournament.players_count}}/{{tournament.player_max}}</span>
       <h4>Participants</h4>
       <table class="table-hover col-md-12">
         <tr>
           <td class="col-md-2">
             <img src="img/default_avatar.png" class="img-responsive" />
           </td>
-          <td class="col-md-10">
-            {{tournament.account.name}} {{tournament.account.lastname}} <span class="label label-info" data-toggle="tooltip" data-placement="top" title="Organisateur du tournoi"> <i class="mdi mdi-crown"></i></span>
+          <td class="col-md-8">
+            <a ui-sref="profil({id:tournament.account.id})">{{tournament.account.name}} {{tournament.account.lastname}}</a>
+          </td>
+          <td class="col-md-2">
+            <span class="label label-info" data-toggle="tooltip" data-placement="top" title="Organisateur du tournoi"> <i class="mdi mdi-crown"></i></span>
           </td>
         </tr>
 
@@ -34,8 +38,11 @@
           <td class="col-md-2">
             <img src="img/default_avatar.png" class="img-responsive" />
           </td>
-          <td class="col-md-10">
-            {{account.nickname}}
+          <td class="col-md-8">
+            <a ui-sref="profil({id:account.id})">{{account.nickname}}</a>
+          </td>
+          <td class="col-md-2">
+            <span ng-if="account.me" class="label label-primary" data-toggle="tooltip" data-placement="top" title="C'est vous !"> <i class="mdi mdi-account"></i></span>
           </td>
         </tr>
       </table>
