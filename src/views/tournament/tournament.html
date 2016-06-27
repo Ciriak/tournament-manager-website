@@ -5,6 +5,7 @@
     </div>
     <div class="col-md-6 text-right">
       <button ng-show="tournamentOpt.canSuscribe" class="btn btn-primary btn-lg" ng-click="tournamentOpt.join()" ng-disabled="tournamentOpt.processing"><i class="mdi mdi-content-paste"></i> {{tournamentOpt.buttonLabel}}</button>
+      <button ng-show="tournamentOpt.canGenerate" class="btn btn-primary btn-lg" ng-click="tournamentOpt.generate()" data-toggle="tooltip" data-placement="bottom" title="Verouiller et générer le tournoi"><i class="mdi mdi-auto-fix"></i></button>
     </div>
   </div>
 
