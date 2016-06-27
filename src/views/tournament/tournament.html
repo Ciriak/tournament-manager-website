@@ -3,6 +3,9 @@
     <div class="col-md-6">
       <h2>{{tournament.name}}</h2>
     </div>
+    <div class="col-md-6 text-right">
+      <button class="btn btn-primary btn-lg" ng-click="tournamentOpt.join()" ng-disabled="tournamentOpt.processing"><i class="mdi mdi-content-paste"></i> {{tournamentOpt.buttonLabel}}</button>
+    </div>
   </div>
 
 </div>
@@ -16,7 +19,27 @@
   </div>
   <div class="col-md-4 panel panel-default">
     <div class="panel-body">
-      <h4>Inscrits</h4>
+      <h4>Participants</h4>
+      <table class="table-hover col-md-12">
+        <tr>
+          <td class="col-md-2">
+            <img src="img/default_avatar.png" class="img-responsive" />
+          </td>
+          <td class="col-md-10">
+            {{tournament.account.name}} {{tournament.account.lastname}} <span class="label label-info" data-toggle="tooltip" data-placement="top" title="Organisateur du tournoi"> <i class="mdi mdi-crown"></i></span>
+          </td>
+        </tr>
+
+        <tr ng-repeat="account in tournament.accounts">
+          <td class="col-md-2">
+            <img src="img/default_avatar.png" class="img-responsive" />
+          </td>
+          <td class="col-md-10">
+            {{account.nickname}}
+          </td>
+        </tr>
+      </table>
+
     </div>
   </div>
 
