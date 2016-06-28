@@ -27,12 +27,13 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
       }
     }
 
+    //check if the user is already in the tournament
     if(i >= 0){
       $scope.tournamentOpt.canSuscribe = false;
       $scope.tournament.accounts[i].me = true;
     }
     else{
-      if($scope.tournament.state !== "Ouvert"){
+      if($scope.tournament.state === "Ouvert"){
         $scope.tournamentOpt.canSuscribe = true;
       }
     }
