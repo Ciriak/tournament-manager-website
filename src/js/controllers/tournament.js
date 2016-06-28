@@ -9,8 +9,6 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
     canGenerate : false
   };
 
-  $("#bracket").html(''); //empty the leaderboard
-
   $http({
     method: 'GET',
     url: $rootScope.apiAddress+'/tournaments/'+$state.params.id+'?access_token=' + $rootScope.access_token
@@ -98,23 +96,63 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
   }
 
   function generateBracket(tournament){
-    console.log(tournament);
+    console.log("Generating bracket...");
       var data = {
           teams : [],
-          results : [
-            [[1,2], [3,4]],       /* first round */
-            [[4,6], [2,1]]        /* second round */
-          ]
+          results : []
         }
 
+        //count the max number of rounds
+        var max_round = 0;
         for (var i = 0; i < tournament.battles.length; i++) {
+
+          if(tournament.battles[i].round > max_round){
+            max_round = tournament.battles[i].round;
+          }
+        }
+
+        // add the empty round array to the results list
+        for (var i = 0; i < max_round; i++) {
+          var t = [];
+          data.results.push(t);
+        }
+
+        console.log(data);
+
+        //loop on every battles
+        for (var i = 0; i < tournament.battles.length; i++) {
+
+          var finished = true;
 
           //add player to list only for round one, the plugin will do the rest
           if(tournament.battles[i].round === 1){
             var t = [tournament.battles[i].player_one.nickname,tournament.battles[i].player_two.nickname];
             data.teams.push(t);
           }
+
+          //read and add the round results
+          var roundIndex = tournament.battles[i].round-1;
+          var battleScore = [0,1];
+          //if their is no winner, stop all
+          if(tournament.battles[i].winner === null || tournament.battles[i].player_one === null || tournament.battles[i].player_two === null){
+            finished = false;
+            battleScore = [0,0];
+            data.results[roundIndex].push(battleScore);
+          }
+
+          // we assign the result depending of the winner
+          if(finished){
+            if(tournament.battles[i].winner === tournament.battles[i].player_one.id){
+              battleScore = [1,0];
+            }
+          }
+
+          if(data.results[roundIndex]){
+            data.results[roundIndex].push(battleScore);
+          }
+
         }
+
 
           $(function() {
             $('#bracket').bracket({init: data});
