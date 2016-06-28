@@ -9,6 +9,8 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
     canGenerate : false
   };
 
+  $("#bracket").html(''); //empty the leaderboard
+
   $http({
     method: 'GET',
     url: $rootScope.apiAddress+'/tournaments/'+$state.params.id+'?access_token=' + $rootScope.access_token
@@ -37,7 +39,20 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
         $scope.tournamentOpt.canSuscribe = true;
       }
     }
-    console.log(r.data);
+
+    //retreive the tournament battle list
+    $http({
+      method: 'GET',
+      url: $rootScope.apiAddress+'/tournaments/'+$state.params.id+'/battles?access_token=' + $rootScope.access_token
+    }).then(function successCallback(r) {
+      $scope.tournament.battles = r.data;
+      console.log("Battles :");
+      console.log(r.data);
+      generateBracket($scope.tournament);
+    });
+
+    console.log($scope.tournament);
+
   }, function errorCallback(r) {
       console.log("This tournament does no exist !");
       $state.go('main');
@@ -81,5 +96,29 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
         console.log("Unable to generate this tournament");
     });
   }
+
+  function generateBracket(tournament){
+    console.log(tournament);
+      var data = {
+          teams : [],
+          results : [
+            [[1,2], [3,4]],       /* first round */
+            [[4,6], [2,1]]        /* second round */
+          ]
+        }
+
+        for (var i = 0; i < tournament.battles.length; i++) {
+
+          //add player to list only for round one, the plugin will do the rest
+          if(tournament.battles[i].round === 1){
+            var t = [tournament.battles[i].player_one.nickname,tournament.battles[i].player_two.nickname];
+            data.teams.push(t);
+          }
+        }
+
+          $(function() {
+            $('#bracket').bracket({init: data});
+          });
+        }
 
 }]);
