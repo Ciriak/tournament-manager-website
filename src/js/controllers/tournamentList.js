@@ -6,7 +6,9 @@ app.controller('tournamentListCtrl', ['$scope', '$http','$rootScope','$location'
     url: $rootScope.apiAddress+'/tournaments?access_token=' + $rootScope.access_token
   }).then(function successCallback(r) {
     $scope.tournaments = r.data;
-    console.log(r.data);
+    for (var i = 0; i < $scope.tournaments.length; i++) {
+      $scope.tournaments[i].players_count = $scope.tournaments[i].accounts.length;
+    }
   }, function errorCallback(r) {
       console.log(r);
   });
