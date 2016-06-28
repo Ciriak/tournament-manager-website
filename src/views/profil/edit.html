@@ -1,7 +1,10 @@
-<div ng-click="profil.setFile('banner')" class="container-fluid" style="background-image:url('http://lorempixel.com/1200/500'); background-size:cover;">
-  <div class="container">
+<div class="container-fluid" style="background-image:url('http://lorempixel.com/1200/500'); background-size:cover;">
+  <div class="container banner">
     <div class="col-md-3">
       <img ng-click="profil.setFile('image')" src="img/default_avatar.png" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" style="height:150px;" />
+    </div>
+    <div class="col-md-3 col-md-offset-6 text-right">
+      <button ng-click="profil.setFile('banner')" class="btn btn-primary">Banner</button>
     </div>
   </div>
 </div>
@@ -10,7 +13,7 @@
   <div class="col-md-6 col-md-offset-3">
 
       <div class="alert alert-danger" role="alert" ng-show="profil.error">{{profil.error}}</div>
-        <div class="alert alert-success" role="alert" ng-show="profil.success">Vos informations ont bien été enregistrées</div>
+      <div class="alert alert-success" role="alert" ng-show="profil.success">Vos informations ont bien été enregistrées</div>
 
     <form ng-submit="profil.save()">
       <div class="form-group">
@@ -54,11 +57,11 @@
 
     </form>
 
-    <input id="profil-image" class="hidden" ng-model="profil.image"
-       type="file" custom-on-change="profil.sendFile('image')" accept="image/*" />
+    <input id="profil-image" class="hidden" fileread="file.image"
+       type="file" onchange="angular.element(this).scope().profil.sendFile('image')" accept="image/*" />
 
-    <input id="profil-banner" class="hidden" ng-model="profil.banner"
-          type="file" custom-on-change="profil.sendFile('banner')" accept="image/*" />
+    <input id="profil-banner" onchange="angular.element(this).scope().profil.sendFile('banner')" class="hidden" fileread="file.banner"
+          type="file" accept="image/*" />
 
   </div>
 

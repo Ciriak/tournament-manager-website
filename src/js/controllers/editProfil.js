@@ -6,6 +6,11 @@ app.controller('editProfilCtrl', ['$scope', '$http','$rootScope','$location','$s
     return;
   }
 
+  $scope.file = {
+    "image" : "",
+    "banner" : ""
+  }
+
 
   $scope.profil = {
     processing : false,
@@ -48,14 +53,18 @@ app.controller('editProfilCtrl', ['$scope', '$http','$rootScope','$location','$s
 
   $scope.profil.setFile = function(type){
     $("#profil-"+type).trigger('click');
+    $scope.profil.sendFile(type);
   };
 
   $scope.profil.sendFile = function(type){
-    console.log("Sending "+type+"...");
+    if($scope.file[type] == ""){
+      return;
+    }
+    console.log("Uploading "+type);
     $http({
       method: 'POST',
       url: $rootScope.apiAddress+'/me/'+type+'?access_token='+$rootScope.access_token,
-      data : $scope.profil
+      data : $scope.file
     }).then(function successCallback(r) {
       console.log(r);
       //$scope.profil.image = false;

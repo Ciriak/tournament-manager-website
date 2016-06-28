@@ -1,5 +1,6 @@
 app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state','localStorageService', function($scope, $http,$rootScope,$location,$state,localStorageService)
 {
+  $scope.avatarFile;
   $scope.isMine = false;
   if($rootScope.me){
     if($rootScope.me.id === $state.params.id){
