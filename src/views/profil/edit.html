@@ -1,7 +1,7 @@
 <div class="container-fluid" style="background-image:url('http://lorempixel.com/1200/500'); background-size:cover;">
   <div class="container banner">
     <div class="col-md-3">
-      <img ng-click="profil.setFile('image')" src="img/default_avatar.png" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" style="height:150px;" />
+      <img ng-click="profil.setFile('image')" fallback-src="img/default_avatar.png" src="{{profil.image}}" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" style="height:150px;" />
     </div>
     <div class="col-md-3 col-md-offset-6 text-right">
       <button ng-click="profil.setFile('banner')" class="btn btn-primary">Banner</button>

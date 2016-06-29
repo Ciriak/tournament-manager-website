@@ -17,13 +17,13 @@
       </thead>
       <tr ng-repeat="profil in profils">
         <td>
-          <img ng-src="{{profil.image}}" alt="{{profil.nickname}}" class="img-responsive" />
+          <img fallback-src="img/default_avatar.png" ng-src="{{profil.image}}" alt="{{profil.nickname}}" class="img-responsive" />
         </td>
         <td>
           {{profil.nickname}}
         </td>
         <td>
-          <a ui-sref="profil({id:profil.id})" class="btn btn-primary btn-sm">Voir <i class="mdi mdi-content-paste"></i></a>
+          <a ui-sref="profil({id:profil.id})" class="btn btn-primary btn-sm">Voir <i class="mdi mdi-account"></i></a>
         </td>
       </tr>
     </table>

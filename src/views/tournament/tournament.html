@@ -25,7 +25,7 @@
       <table class="table-hover col-md-12">
         <tr>
           <td class="col-md-2">
-            <img src="img/default_avatar.png" class="img-responsive" />
+            <img  fallback-src="img/default_avatar.png" ng-src="{{tournament.account.image}}" class="img-responsive" />
           </td>
           <td class="col-md-8">
             <a ui-sref="profil({id:tournament.account.id})">{{tournament.account.name}} {{tournament.account.lastname}}</a>
@@ -37,7 +37,7 @@
 
         <tr ng-repeat="account in tournament.accounts">
           <td class="col-md-2">
-            <img src="img/default_avatar.png" class="img-responsive" />
+            <img fallback-src="img/default_avatar.png" ng-src="{{account.image}}" class="img-responsive" />
           </td>
           <td class="col-md-8">
             <a ui-sref="profil({id:account.id})">{{account.nickname}}</a>
@@ -52,7 +52,7 @@
   </div>
 
   <div class="col-md-6">
-    <div id="bracket">
+    <div id="bracket" ng-show="tournament.state === 'Verouillé'">
       Chargement...
     </div>
   </div>
