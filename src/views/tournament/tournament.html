@@ -51,10 +51,24 @@
     </div>
   </div>
 
-  <div class="col-md-6">
-    <div id="bracket" ng-show="tournament.state === 'Verouillé'">
+  <div class="col-md-7 alert alert-info">
+    <div class="col-md-9 text-center">
+      <b>Votre match est prêt à etre disputé !</b>
+    </div>
+    <div class="col-md-3">
+      <button ng-click="setReady()" class="btn btn-info" title="Je suis prêt !"><i class="mdi mdi-gamepad-variant"></i> Je suis prêt !</button>
+    </div>
+  </div>
+
+  <div class="col-md-7" ng-show="tournament.state !== 'Verouillé'">
+    <div id="bracket">
       Chargement...
     </div>
+  </div>
+
+  <div class="col-md-6 text-center tournament-info" ng-hide="tournament.state !== 'Verouillé'">
+    <h4>Le tournoi n'a pas encoré été complété...</h4>
+    <img src="img/tournament.png" class="col-md-8 col-md-offset-2 img-responsive" />
   </div>
 
 </div>

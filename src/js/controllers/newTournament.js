@@ -24,6 +24,7 @@ app.controller('newTournamentCtrl', ['$scope', '$http','$rootScope','$location',
       data : $scope.tournament
     }).then(function successCallback(r) {
       $scope.tournament.success = true;
+      $state.go("tournamentList");
     }, function errorCallback(r) {
       if(r.data.error){
         $scope.tournament.error = r.data.error.exception[0].message;
