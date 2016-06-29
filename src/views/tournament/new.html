@@ -33,7 +33,11 @@
 
       <div class="form-group">
         <label>Nombre maximum de participants</label>
-        <input type="number" placeholder="" class="form-control" ng-model="tournament.player_max" ng-disabled="tournament.processing">
+        <select class="form-control" ng-model="tournament.player_max" ng-disabled="tournament.processing">
+          <option value="4">4</option>
+          <option value="8">8</option>
+          <option value="16">16</option>
+        </select>
       </div>
 
       <div class="form-group text-right">
