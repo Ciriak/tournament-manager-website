@@ -1,5 +1,9 @@
 app.controller('profilListCtrl', ['$scope', '$http','$rootScope','$location','$state','localStorageService', function($scope, $http,$rootScope,$location,$state,localStorageService)
 {
+  if(!$rootScope.me){
+    $state.go('login');
+    return;
+  }
 
   $http({
     method: 'GET',

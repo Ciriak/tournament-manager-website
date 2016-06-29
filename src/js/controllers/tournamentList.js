@@ -1,6 +1,11 @@
 app.controller('tournamentListCtrl', ['$scope', '$http','$rootScope','$location','$state','localStorageService', function($scope, $http,$rootScope,$location,$state,localStorageService)
 {
 
+  if(!$rootScope.me){
+    $state.go('login');
+    return;
+  }
+
   $http({
     method: 'GET',
     url: $rootScope.apiAddress+'/tournaments?access_token=' + $rootScope.access_token
