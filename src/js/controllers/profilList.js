@@ -2,7 +2,6 @@ app.controller('profilListCtrl', ['$scope', '$http','$rootScope','$location','$s
 {
   if(!$rootScope.me){
     $state.go('login');
-    return;
   }
 
   $http({

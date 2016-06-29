@@ -3,7 +3,6 @@ app.controller('tournamentListCtrl', ['$scope', '$http','$rootScope','$location'
 
   if(!$rootScope.me){
     $state.go('login');
-    return;
   }
 
   $http({
