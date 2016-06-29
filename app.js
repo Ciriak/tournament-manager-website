@@ -6,7 +6,8 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 
 //edit the api location here
-var apiIndex = "http://164.132.110.56/TournamentManager/current/web/app_dev.php";
+//164.132.110.56
+var apiIndex = "http://127.0.0.1/TournamentManager/web/app_dev.php";
 
 app.use(express.static('public'));
 // parse application/x-www-form-urlencoded
