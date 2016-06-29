@@ -27,7 +27,7 @@ app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state
   $scope.comment = {
     processing : false,
     error : false,
-    text : null
+    message : null
   }
 
   $scope.comment.post = function(){
@@ -35,9 +35,10 @@ app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state
     this.error = false;
     $http({
       method: 'POST',
+      data : $scope.comment,
       url: $rootScope.apiAddress+'/comments/'+$state.params.id+'?access_token=' + $rootScope.access_token
     }).then(function successCallback(r) {
-      $scope.comment.text = "";
+      $scope.comment.message = "";
       $scope.comment.processing = false;
     }, function errorCallback(r) {
       $scope.comment.processing = false;

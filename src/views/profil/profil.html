@@ -8,7 +8,7 @@
       <p>{{profil.description}}</p>
     </div>
     <div class="col-md-3 text-right">
-      <a ui-sref="editProfil" class="btn btn-primary" title="Editer mon profil" ng-show="profil.id === me.id"><i class="mdi mdi-pencil"></i></a>
+      <a ui-sref="editProfil" class="btn btn-primary" title="Editer mon profil" ng-show="profil.id === me.id"><i class="mdi mdi-pencil"></i> Editer mon profil</a>
     </div>
   </div>
 
@@ -29,8 +29,11 @@
 
   <div class="col-md-6">
     <h4>Commentaires</h4>
-    <form class="row" ng-submit="postComment()" ng-if="me">
-      <textarea rows="2" cols="40" placeholder="Entrez un commentaire" class="form-control" ng-model="comment.text" ng-disabled="comment.processing" required></textarea>
+    <form class="row" ng-submit="comment.post()" ng-if="me">
+      <div class="alert alert-danger" ng-show="comment.error">
+        {{comment.error}}
+      </div>
+      <textarea rows="2" cols="40" placeholder="Entrez un commentaire" class="form-control" ng-model="comment.message" ng-disabled="comment.processing" required></textarea>
       <div class="text-right">
           <button type="submit" class="btn btn-info" ng-disabled="comment.processing">Poster</button>
       </div>
