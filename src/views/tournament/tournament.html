@@ -60,13 +60,13 @@
     </div>
   </div>
 
-  <div class="col-md-7" ng-show="tournament.state !== 'Verouillé'">
+  <div class="col-md-7" ng-show="tournament.state === 'Verouillé'">
     <div id="bracket">
       Chargement...
     </div>
   </div>
 
-  <div class="col-md-6 text-center tournament-info" ng-hide="tournament.state !== 'Verouillé'">
+  <div class="col-md-6 text-center tournament-info" ng-hide="tournament.state === 'Verouillé'">
     <h4>Le tournoi n'a pas encoré été complété...</h4>
     <img src="img/tournament.png" class="col-md-8 col-md-offset-2 img-responsive" />
   </div>
