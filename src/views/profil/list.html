@@ -1,21 +1,34 @@
 <div class="container">
-  <h4>Liste des tournois</h4>
+  <h4>Liste des utilisateurs</h4>
   <div class="col-md-8">
     <table class="table table-hover">
-      <tr>
+      <thead>
+        <tr>
+          <td>
+            <!-- avatar -->
+          </td>
+          <td>
+            Pseudonyme
+          </td>
+          <td>
+          <!-- options -->
+          </td>
+        </tr>
+      </thead>
+      <tr ng-repeat="profil in profils">
         <td>
-          YOLO
+          <img ng-src="{{profil.image}}" alt="{{profil.nickname}}" class="img-responsive" />
         </td>
         <td>
-          YOLO
+          {{profil.nickname}}
         </td>
         <td>
-          Hgrehugt
+          <a ui-sref="profil({id:profil.id})" class="btn btn-primary btn-sm">Voir <i class="mdi mdi-content-paste"></i></a>
         </td>
       </tr>
     </table>
   </div>
   <div class="col-md-4">
-    YOLO
+    <h4>Top des utilisateurs</h4>
   </div>
 </div>
