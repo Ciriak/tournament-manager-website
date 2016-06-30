@@ -128,8 +128,10 @@ app.config(function (localStorageServiceProvider) {
 app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state','localStorageService', function($scope, $http,$rootScope,$location,$state,localStorageService)
 {
   var apiAddress = "http://"+$location.host()+":"+$location.port()+"/api";
+  var imgBasePath = "http://"+$location.host()+":"+$location.port()+"/image";
 
   $rootScope.apiAddress = apiAddress;
+  $rootScope.imgBasePath = imgBasePath;
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     // called when a state change
@@ -145,6 +147,10 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
     setTimeout(function(){
       location.reload();
     },500);
+  }
+
+  $rootScope.getImagePath = function(imgName){
+    return imgBasePath+"/"+imgName;
   }
 
   //check if the user is logged in and define the current one
@@ -163,6 +169,7 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
       $rootScope.me = r.data;
       $rootScope.me.birth_date_o = $rootScope.me.birth_date;
       $rootScope.me.birth_date = new Date(moment($rootScope.me.birth_date).format("YYYY-MM-DD"));
+      $rootScope.me.image = $rootScope.getImagePath(r.data.img);
       console.log($rootScope.me);
 
     }, function errorCallback(r) {
@@ -182,9 +189,11 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
       method: 'GET',
       url: $rootScope.apiAddress+'/notification/last?access_token=' + $rootScope.access_token
     }).then(function successCallback(r) {
+      console.log("Notif");
       if(r.data.length > 0){
-        $scope.notification.data = r.data;
+        $scope.notification.data = r.data[0];
         $scope.notification.unread = true;
+        console.log($scope.notification);
       }
     }, function errorCallback(r) {
         console.log("Unable to check for nnotification");
