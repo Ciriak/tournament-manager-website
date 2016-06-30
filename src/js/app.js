@@ -174,7 +174,6 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
   }
 
   $scope.notification = {
-    text : "",
     unread : false
   }
 
@@ -184,6 +183,7 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
       url: $rootScope.apiAddress+'/notification/last?access_token=' + $rootScope.access_token
     }).then(function successCallback(r) {
       $scope.notification.data = r.data;
+      $scope.notification.unread = true;
     }, function errorCallback(r) {
         console.log("Unable to check for nnotification");
     });
@@ -193,7 +193,7 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
 
   $scope.notification.view = function(notification){
     $scope.notification.unread = false;
-    http({
+    $http({
       method: 'POST',
       url: $rootScope.apiAddress+'/notification/'+notification+'/seen?access_token=' + $rootScope.access_token
     }).then(function successCallback(r) {
