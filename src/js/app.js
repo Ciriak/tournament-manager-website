@@ -125,9 +125,11 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
 {
   var apiAddress = "http://"+$location.host()+":"+$location.port()+"/api";
   var imgBasePath = "http://"+$location.host()+":"+$location.port()+"/image";
+  var bannerBasePath = "http://"+$location.host()+":"+$location.port()+"/banners";
 
   $rootScope.apiAddress = apiAddress;
   $rootScope.imgBasePath = imgBasePath;
+  $rootScope.bannerBasePath = bannerBasePath;
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     // called when a state change
@@ -147,6 +149,10 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
 
   $rootScope.getImagePath = function(imgName){
     return imgBasePath+"/"+imgName;
+  }
+
+  $rootScope.getBannerPath = function(bannerName){
+    return bannerBasePath+"/"+bannerName;
   }
 
   //check if the user is logged in and define the current one

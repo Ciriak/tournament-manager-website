@@ -35,6 +35,22 @@ app.all('/image/*', function (req, res) {
 
 });
 
+app.all('/banners/*', function (req, res) {
+  var reqPath = "/accounts/banners"+req.url.replace("/banners","");
+  console.log("-- IMAGE Call --");
+  console.log(req.method+" on "+apiAddress+reqPath);
+
+    var options = {
+      url : apiAddress+reqPath,
+      method: req.method
+    }
+
+    req.pipe(request(options.url)).pipe(res);
+
+      console.log("-> Status "+res.statusCode);
+
+});
+
 app.all('/api/*', function (req, res) {
   var reqPath = req.url.replace("/api","");
   console.log("-- APi Call --");
