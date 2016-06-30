@@ -44,7 +44,7 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
     $scope.unsuscribe = function(){
       $http({
         method: 'DELETE',
-        url: $rootScope.apiAddress+'/tournament/'+$state.params.id+'/unsuscribe',
+        url: $rootScope.apiAddress+'/tournament/'+$state.params.id+'/unsubscribe',
         data : $scope.me
       }).then(function successCallback(r) {
         console.log("Unsuscribed");
@@ -77,6 +77,15 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
       if($scope.tournament.state === "Verouillé"){
         generateBracket($scope.tournament);
       }
+    });
+
+    //retreive current battle
+    //retreive the tournament battle list
+    $http({
+      method: 'GET',
+      url: $rootScope.apiAddress+'/tournaments/'+$state.params.id+'/currentBattle?access_token=' + $rootScope.access_token
+    }).then(function successCallback(r) {
+
     });
 
     console.log($scope.tournament);
