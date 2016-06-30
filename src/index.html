@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/dep/jquery-bracket/dist/jquery.bracket.min.css" charset="utf-8">
     <link rel="stylesheet" href="/dep/mdi/css/materialdesignicons.min.css" charset="utf-8">
     <link rel="stylesheet" href="/dep/bootstrap-select/dist/css/bootstrap-select.min.css" charset="utf-8">
+    <link rel="stylesheet" href="/dep/animate.css/animate.min.css" charset="utf-8">
     <link rel="stylesheet" href="/css/style.css" charset="utf-8">
 
   </head>
@@ -58,8 +59,9 @@
       </div>
     </nav>
 
-    <div class="notification alert alert-info col-md-4" ng-click="notification.view()" ng-show="notification.unread">
-      {{notification.data.message}}
+    <div class="notification alert alert-info col-md-4 text-center" ng-click="notification.view()" ng-show="notification.unread" ng-class="{'animated slideInRight' : notification.unread}">
+      <p>{{notification.data.message}}</p>
+      <a ui-sref="tournament({id:notification.data.tournament.id})" class="btn btn-info">C'est partit !</a>
     </div>
 
     <div ui-view></div>

@@ -198,13 +198,14 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
 
 
 
-  $scope.notification.view = function(notification){
+  $scope.notification.view = function(){
     $scope.notification.unread = false;
     $http({
       method: 'POST',
-      url: $rootScope.apiAddress+'/notification/'+notification+'/seen?access_token=' + $rootScope.access_token
+      url: $rootScope.apiAddress+'/notification/'+$scope.notification.data.id+'/seen?access_token=' + $rootScope.access_token
     }).then(function successCallback(r) {
       console.log("Notification set as read");
+      $(".notification").addClass("slideOutRight").removeClass('slideInRight');
     }, function errorCallback(r) {
         console.log("Unable to set notification as read");
     });
