@@ -58,6 +58,10 @@
       </div>
     </nav>
 
+    <div class="notification" ng-click="notification.view()" ng-show="notification.unread">
+      {{notification.text}}
+    </div>
+
     <div ui-view></div>
 
     <footer class=container-fluid>

@@ -31,6 +31,15 @@ footer{
   padding-bottom: 50px;
 }
 
+.notification{
+  cursor:pointer;
+  position: fixed;
+  z-index:500;
+  top: 0;
+  right: 0;
+  margin:20px;
+}
+
 @media (min-width: 768px ) {
   .row {
       position: relative;

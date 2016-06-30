@@ -53,6 +53,7 @@ app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state
 
       $scope.comment.processing = false;
       var c = {
+        id : r.data.id,
         message : $scope.comment.message,
         send_by : $scope.me
       };

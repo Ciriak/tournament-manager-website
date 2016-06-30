@@ -173,8 +173,44 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
     });
   }
 
+  $scope.notification = {
+    text : "",
+    unread : false
+  }
+
+  function checkNotif(){
+    $http({
+      method: 'GET',
+      url: $rootScope.apiAddress+'/notification/last?access_token=' + $rootScope.access_token
+    }).then(function successCallback(r) {
+      $scope.notification.data = r.data;
+    }, function errorCallback(r) {
+        console.log("Unable to check for nnotification");
+    });
+  }
+
+
+
+  $scope.notification.view = function(notification){
+    $scope.notification.unread = false;
+    http({
+      method: 'POST',
+      url: $rootScope.apiAddress+'/notification/'+notification+'/seen?access_token=' + $rootScope.access_token
+    }).then(function successCallback(r) {
+      console.log("Notification set as read");
+    }, function errorCallback(r) {
+        console.log("Unable to set notification as read");
+    });
+  };
+
   //initialize Bootstrap components
   $(function () {
+    //check notif on load and every 15 sec
+    checkNotif();
+    var r = setInterval(function(){
+      checkNotif();
+    },15000);
+
     $('[data-toggle="tooltip"]').tooltip()
   })
 
