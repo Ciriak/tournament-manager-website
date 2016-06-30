@@ -40,16 +40,16 @@
     </form>
 
     <table class="table">
-      <tr ng-repeat="c in comments" id="comment-{{c.id}}">
-        <td>
-          <!-- avatar -->
+      <tr ng-repeat="c in profil.comments | reverse" id="comment-{{c.id}}">
+        <td class="col-md-2">
+          <img ng-src="{{c.send_by.image}}" alt="{{c.send_by.nickname}}" />
+          {{c.send_by.nickname}}
         </td>
-        <td>
-          <!-- text -->
+        <td class="col-md-8">
+          {{c.message}}
         </td>
-        <td ng-show="isMine">
-          <!-- options -->
-          <button class="btn btn-sm btn-danger" ng-click="comment.delete(c.id);" title="Supprimer ce commentaire"></button>
+        <td class="col-md-2" ng-show="profil.id === me.id">
+          <button class="btn btn-sm btn-danger" ng-click="comment.delete(c.id);" title="Supprimer ce commentaire"><i class="mdi mdi-close"></i></button>
         </td>
       </tr>
     </table>

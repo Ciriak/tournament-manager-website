@@ -18,6 +18,18 @@ app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state
     }).then(function successCallback(r) {
       $scope.profil = r.data;
       console.log(r.data);
+      //retreive comments
+      console.log("Retreiving comments...");
+      $http({
+        method: 'GET',
+        url: $rootScope.apiAddress+'/comments/'+$state.params.id+'?access_token=' + $rootScope.access_token
+      }).then(function successCallback(rc) {
+        $scope.profil.comments = rc.data;
+        $scope.comment.processing = false;
+        console.log(rc.data);
+      }, function errorCallback(rc) {
+          console.log("Unable to retreive profil comments");
+      });
     }, function errorCallback(r) {
         console.log("This profil does no exist !");
         $state.go('main');
@@ -25,7 +37,7 @@ app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state
   }
 
   $scope.comment = {
-    processing : false,
+    processing : true,
     error : false,
     message : null
   }
@@ -38,8 +50,17 @@ app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state
       data : $scope.comment,
       url: $rootScope.apiAddress+'/comments/'+$state.params.id+'?access_token=' + $rootScope.access_token
     }).then(function successCallback(r) {
-      $scope.comment.message = "";
+
       $scope.comment.processing = false;
+      var c = {
+        message : $scope.comment.message,
+        send_by : $scope.me
+      };
+      $scope.profil.comments.push(c);
+      if(!$scope.$$phase) {
+				$scope.$apply();
+			}
+      $scope.comment.message = "";
     }, function errorCallback(r) {
       $scope.comment.processing = false;
       $scope.comment.error = "Une erreur s'est produite lors du post du commentaire";
@@ -47,7 +68,7 @@ app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state
   };
 
   $scope.comment.delete = function(comment){
-    if(!$scope.isMine){
+    if($scope.profil.id !== $rootScope.me.id){
       return;
     }
 
@@ -58,7 +79,7 @@ app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state
       $("#comment-"+comment).fadeOut();
     }, function errorCallback(r) {
       $scope.comment.processing = false;
-      $scope.comment.error = "Une erreur s'est produite lors du post du commentaire";
+      $scope.comment.error = "Une erreur s'est produite lors de la suppression du commentaire";
     });
 
   };

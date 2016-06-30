@@ -58,6 +58,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 });
 
+app.filter('reverse', function() {
+  return function(items) {
+    return items.slice().reverse();
+  };
+});
+
 app.directive('customOnChange', function() {
   return {
     restrict: 'A',
