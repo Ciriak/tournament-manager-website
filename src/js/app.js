@@ -182,8 +182,10 @@ app.controller('mainCtrl', ['$scope', '$http','$rootScope','$location','$state',
       method: 'GET',
       url: $rootScope.apiAddress+'/notification/last?access_token=' + $rootScope.access_token
     }).then(function successCallback(r) {
-      $scope.notification.data = r.data;
-      $scope.notification.unread = true;
+      if(r.data.length > 0){
+        $scope.notification.data = r.data;
+        $scope.notification.unread = true;
+      }
     }, function errorCallback(r) {
         console.log("Unable to check for nnotification");
     });

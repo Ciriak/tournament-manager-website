@@ -7,7 +7,7 @@ app.controller('editProfilCtrl', ['$scope', '$http','$rootScope','$location','$s
   }
 
   $scope.file = {
-    "image" : "",
+    "img" : "",
     "banner" : ""
   }
 

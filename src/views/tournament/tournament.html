@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-image:url('http://lorempixel.com/1200/500'); background-size:cover;">
+<div class="container-fluid" style="background-image:url('img/lan_bg.jpg'); background-size:cover;">
   <div class="container banner">
     <div class="col-md-6">
       <h2>{{tournament.name}}</h2>
@@ -30,6 +30,9 @@
           <td class="col-md-8">
             <a ui-sref="profil({id:tournament.account.id})">{{tournament.account.name}} {{tournament.account.lastname}}</a>
           </td>
+          <td>
+            <!-- level -->
+          </td>
           <td class="col-md-2">
             <span class="label label-info" data-toggle="tooltip" data-placement="top" title="Organisateur du tournoi"> <i class="mdi mdi-crown"></i></span>
           </td>
@@ -41,6 +44,9 @@
           </td>
           <td class="col-md-8">
             <a ui-sref="profil({id:account.id})">{{account.nickname}}</a>
+          </td>
+          <td>
+            <span class="badge" title="Niveau {{account.level.level}}">{{account.level.level}}</span>
           </td>
           <td class="col-md-2">
             <span ng-if="account.me" class="label label-primary" data-toggle="tooltip" data-placement="top" title="C'est vous !"> <i class="mdi mdi-account"></i></span>
