@@ -42,11 +42,12 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('images', function(cb) {
-    gulp.src(['src/**/*.png','src/**/*.jpg','src/**/*.gif','src/**/*.jpeg']).pipe(gulp.dest('./public')).on('end', cb).on('error', cb);
+  gulp.src(['src/**/*.png','src/**/*.jpg','src/**/*.gif','src/**/*.jpeg'])
+        .pipe(gulp.dest('./public')).on('end', cb).on('error', cb);
 });
 
 gulp.task('bower', function() {
-  gulp.src('./src/bower_components/**/*')
+  return gulp.src('./src/bower_components/**/*')
   .pipe(gulp.dest('./public/dep/'));
 });
 
