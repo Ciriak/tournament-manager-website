@@ -25,7 +25,7 @@
       <table class="table-hover col-md-12">
         <tr>
           <td class="col-md-2">
-            <img  fallback-src="img/default_avatar.png" ng-src="{{tournament.account.image}}" class="img-responsive" />
+            <img  fallback-src="img/default_avatar.png" ng-src="{{getImagePath(tournament.account.img)}}" class="img-responsive" />
           </td>
           <td class="col-md-8">
             <a ui-sref="profil({id:tournament.account.id})">{{tournament.account.name}} {{tournament.account.lastname}}</a>
@@ -40,16 +40,16 @@
 
         <tr ng-repeat="account in tournament.accounts">
           <td class="col-md-2">
-            <img fallback-src="img/default_avatar.png" ng-src="{{account.image}}" class="img-responsive" />
+            <img fallback-src="img/default_avatar.png" ng-src="{{getImagePath(account.img)}}" class="img-responsive img-thumbnail" />
           </td>
-          <td class="col-md-8">
+          <td class="col-md-7">
             <a ui-sref="profil({id:account.id})">{{account.nickname}}</a>
           </td>
           <td>
             <span class="badge" title="Niveau {{account.level.level}}">{{account.level.level}}</span>
           </td>
-          <td class="col-md-2">
-            <span ng-if="account.me" class="label label-primary" data-toggle="tooltip" data-placement="top" title="C'est vous !"> <i class="mdi mdi-account"></i></span>
+          <td class="col-md-3">
+            <span ng-if="account.me" style="cursor : pointer;" class="label label-danger" title="Se désinscrire du tournoi" ng-click="unsuscribe()"><i class="mdi mdi-close"></i></span>
           </td>
         </tr>
       </table>
@@ -57,7 +57,7 @@
     </div>
   </div>
 
-  <div class="col-md-7 alert alert-info">
+  <div class="col-md-7 alert alert-info battle-alert">
     <div class="col-md-9 text-center">
       <b>Votre match est prêt à etre disputé !</b>
     </div>

@@ -40,6 +40,32 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
       }
     }
 
+    //un suscribe from the tournament
+    $scope.unsuscribe = function(){
+      $http({
+        method: 'DELETE',
+        url: $rootScope.apiAddress+'/tournament/'+$state.params.id+'/unsuscribe',
+        data : $scope.me
+      }).then(function successCallback(r) {
+        console.log("Unsuscribed");
+        location.reload();
+      }, function errorCallback(r) {
+        console.log("Error while Unsuscribing");
+      });
+    }
+
+    $scope.setReady = function(){
+      $http({
+        method: 'POST',
+        url: $rootScope.apiAddress+'/battle//ready',
+        data : $scope.me
+      }).then(function successCallback(r) {
+
+      }, function errorCallback(r) {
+
+      });
+    };
+
     //retreive the tournament battle list
     $http({
       method: 'GET',
