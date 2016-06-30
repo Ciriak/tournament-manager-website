@@ -11,6 +11,9 @@
             Pseudonyme
           </td>
           <td>
+            Niveau
+          </td>
+          <td>
           <!-- options -->
           </td>
         </tr>
@@ -20,7 +23,10 @@
           <img fallback-src="img/default_avatar.png" ng-src="{{profil.image}}" alt="{{profil.nickname}}" class="img-responsive" />
         </td>
         <td>
-          {{profil.nickname}}
+          {{profil.nickname}} <span class="label label-info" ng-if="me.id === profil.id" title="C'est vous !"><i class="mdi mdi-account"></i></span>
+        </td>
+        <td>
+          <span class="badge">{{profil.level.level}}</span>
         </td>
         <td>
           <a ui-sref="profil({id:profil.id})" class="btn btn-primary btn-sm">Voir <i class="mdi mdi-account"></i></a>
@@ -30,5 +36,33 @@
   </div>
   <div class="col-md-4">
     <h4>Top des utilisateurs</h4>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <td>
+            Pseudonyme
+          </td>
+          <td>
+            Niveau
+          </td>
+          <td>
+          <!-- options -->
+          </td>
+        </tr>
+      </thead>
+      <tr ng-repeat="profil in topUsers">
+        <td>
+          {{profil.nickname}} <span class="label label-info" ng-if="me.id === profil.id" title="C'est vous !"><i class="mdi mdi-account"></i></span>
+        </td>
+        <td>
+          <span class="badge">{{profil.level.level}}</span>
+        </td>
+        <td>
+          <a ui-sref="profil({id:profil.id})" class="btn btn-info btn-sm">Voir <i class="mdi mdi-account"></i></a>
+        </td>
+      </tr>
+    </table>
+
   </div>
 </div>
