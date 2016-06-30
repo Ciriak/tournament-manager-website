@@ -17,6 +17,11 @@ body{
   }
 }
 
+.uploading{
+  transition-duration:0.5s;
+  opacity: 0.7;
+}
+
 .tournament-info{
   opacity:0.3;
 }

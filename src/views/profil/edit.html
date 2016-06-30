@@ -1,7 +1,7 @@
 <div class="container-fluid" style="background-color:#212121;background-image:url('{{getImagePath(profil.banner)}}'); background-size:cover;">
   <div class="container banner">
     <div class="col-md-3">
-      <img ng-click="profil.setFile('image')" style="cursor:pointer" title="Modifier mon Avatar" fallback-src="img/default_avatar.png" ng-src="{{getImagePath(profil.img)}}" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" style="height:150px;" />
+      <img ng-click="profil.setFile('img')" style="cursor:pointer" title="Modifier mon Avatar" fallback-src="img/default_avatar.png" ng-src="{{getImagePath(profil.img)}}" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" ng-class="{'uploading' : uploadProcessing}" style="height:150px;" />
     </div>
     <div class="col-md-3 col-md-offset-6 text-right">
       <button ng-click="profil.setFile('banner')" class="btn btn-primary">Changer la bannière</button>
@@ -57,8 +57,8 @@
 
     </form>
 
-    <input id="profil-image" class="hidden" fileread="file.img"
-       type="file" onchange="angular.element(this).scope().profil.sendFile('image')" accept="image/*" />
+    <input id="profil-img" class="hidden" fileread="file.img"
+       type="file" onchange="angular.element(this).scope().profil.sendFile('img')" accept="image/*" />
 
     <input id="profil-banner" onchange="angular.element(this).scope().profil.sendFile('banner')" class="hidden" fileread="file.banner"
           type="file" accept="image/*" />

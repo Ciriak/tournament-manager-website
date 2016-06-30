@@ -17,4 +17,17 @@ app.controller('tournamentListCtrl', ['$scope', '$http','$rootScope','$location'
       console.log(r);
   });
 
+  //retreive registered tournaments
+  $http({
+    method: 'GET',
+    url: $rootScope.apiAddress+'/tournament/registered?access_token=' + $rootScope.access_token
+  }).then(function successCallback(r) {
+    $scope.registered = r.data;
+    for (var i = 0; i < $scope.registered.length; i++) {
+      $scope.registered[i].players_count = $scope.registered[i].accounts.length;
+    }
+  }, function errorCallback(r) {
+      console.log(r);
+  });
+
 }]);

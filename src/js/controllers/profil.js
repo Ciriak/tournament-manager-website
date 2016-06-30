@@ -1,5 +1,6 @@
 app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state','localStorageService', function($scope, $http,$rootScope,$location,$state,localStorageService)
 {
+  $scope.profil = {};
   $scope.avatarFile;
   $scope.isMine = false;
   if($rootScope.me){
@@ -18,23 +19,24 @@ app.controller('profilCtrl', ['$scope', '$http','$rootScope','$location','$state
     }).then(function successCallback(r) {
       $scope.profil = r.data;
       console.log(r.data);
-      //retreive comments
-      console.log("Retreiving comments...");
-      $http({
-        method: 'GET',
-        url: $rootScope.apiAddress+'/comments/'+$state.params.id+'?access_token=' + $rootScope.access_token
-      }).then(function successCallback(rc) {
-        $scope.profil.comments = rc.data;
-        $scope.comment.processing = false;
-        console.log(rc.data);
-      }, function errorCallback(rc) {
-          console.log("Unable to retreive profil comments");
-      });
     }, function errorCallback(r) {
         console.log("This profil does no exist !");
         $state.go('main');
     });
   }
+
+  //retreive comments
+  console.log("Retreiving comments...");
+  $http({
+    method: 'GET',
+    url: $rootScope.apiAddress+'/comments/'+$state.params.id+'?access_token=' + $rootScope.access_token
+  }).then(function successCallback(rc) {
+    $scope.profil.comments = rc.data;
+    $scope.comment.processing = false;
+    console.log(rc.data);
+  }, function errorCallback(rc) {
+      console.log("Unable to retreive profil comments");
+  });
 
   $scope.comment = {
     processing : true,

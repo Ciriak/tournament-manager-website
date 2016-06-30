@@ -43,7 +43,7 @@
       <tr ng-repeat="c in profil.comments" id="comment-{{c.id}}">
         <td class="col-md-2">
           <img fallback-src="img/default_avatar.png" ng-src="{{getImagePath(c.send_by.img)}}" alt="{{c.send_by.nickname}}" class="img-reponsive col-md-12 img-thumbnail" />
-          {{c.send_by.nickname}}
+          <a ui-sref="profil({id:c.send_by.id})">{{c.send_by.nickname}}</a>
         </td>
         <td class="col-md-8">
           {{c.message}}

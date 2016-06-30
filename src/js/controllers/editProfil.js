@@ -53,22 +53,37 @@ app.controller('editProfilCtrl', ['$scope', '$http','$rootScope','$location','$s
 
   $scope.profil.setFile = function(type){
     $("#profil-"+type).trigger('click');
-    $scope.profil.sendFile(type);
   };
 
   $scope.profil.sendFile = function(type){
-    if($scope.file[type] == ""){
+    console.log("Uploading "+type);
+    if($scope.file[type] === undefined){
+      console.log("Empty data - stop process");
       return;
     }
-    console.log("Uploading "+type);
+    //fucking ecxeption because of rémi
+    if(type === "img"){
+      type = "image";
+    }
+
+    $scope.uploadProcessing = true;
+
     $http({
       method: 'POST',
       url: $rootScope.apiAddress+'/me/'+type+'?access_token='+$rootScope.access_token,
       data : $scope.file
     }).then(function successCallback(r) {
+      $scope.uploadProcessing = false;
+      //fucking ecxeption because of rémi
+      if(type == "image"){
+        type = "img";
+      }
+      $state.go($state.current, {}, {reload: true});
+      console.log($rootScope.me);
       console.log(r);
       //$scope.profil.image = false;
     }, function errorCallback(r) {
+      $scope.uploadProcessing = false;
       console.log(r);
     });
   };
