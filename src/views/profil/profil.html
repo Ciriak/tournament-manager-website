@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-image:url('http://lorempixel.com/1200/500'); background-size:cover;">
+<div class="container-fluid" style="background-color:#212121;background-image:url('{{getImagePath(profil.banner)}}'); background-size:cover;">
   <div class="container banner">
     <div class="col-md-3">
       <img fallback-src="img/default_avatar.png" ng-src="{{getImagePath(profil.img)}}" class="img-thumbnail img-responsive" alt="{{profil.nickname}}" style="height:150px;" />
@@ -40,9 +40,9 @@
     </form>
 
     <table class="table">
-      <tr ng-repeat="c in profil.comments | reverse" id="comment-{{c.id}}">
+      <tr ng-repeat="c in profil.comments" id="comment-{{c.id}}">
         <td class="col-md-2">
-          <img ng-src="{{c.send_by.image}}" alt="{{c.send_by.nickname}}" />
+          <img fallback-src="img/default_avatar.png" ng-src="{{getImagePath(c.send_by.img)}}" alt="{{c.send_by.nickname}}" class="img-reponsive col-md-12 img-thumbnail" />
           {{c.send_by.nickname}}
         </td>
         <td class="col-md-8">

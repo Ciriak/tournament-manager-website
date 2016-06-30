@@ -19,8 +19,8 @@
         </tr>
       </thead>
       <tr ng-repeat="profil in profils">
-        <td>
-          <img fallback-src="img/default_avatar.png" ng-src="{{getImagePath(profil.img)}}" alt="{{profil.nickname}}" class="img-responsive" />
+        <td class="col-md-1">
+          <img fallback-src="img/default_avatar.png" ng-src="{{getImagePath(profil.img)}}" class="img-responsive img-thumbnail" alt="{{profil.nickname}}" class="img-responsive" />
         </td>
         <td>
           {{profil.nickname}} <span class="label label-info" ng-if="me.id === profil.id" title="C'est vous !"><i class="mdi mdi-account"></i></span>

@@ -29,6 +29,10 @@ app.all('/image/*', function (req, res) {
       method: req.method
     }
 
+    req.pipe(request(options.url)).pipe(res);
+
+      console.log("-> Status "+res.statusCode);
+
 });
 
 app.all('/api/*', function (req, res) {
