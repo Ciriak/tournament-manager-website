@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/dep/bootstrap-select/dist/css/bootstrap-select.min.css" charset="utf-8">
     <link rel="stylesheet" href="/dep/animate.css/animate.min.css" charset="utf-8">
     <link rel="stylesheet" href="/css/style.css" charset="utf-8">
+    <link rel="icon" type="image/png" href="img/favicon.png" />
 
   </head>
   <body ng-controller="mainCtrl">
@@ -25,7 +26,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">LOGO</a>
+          <a class="navbar-brand" rel="home" ui-sref="main" title="Tournament Manager">
+              <img style="max-width:100px; margin-top: -7px;"
+                   src="img/logo.png">
+          </a>
+          <a class="navbar-brand" ><img src="" alt="" /></a>
         </div>
 
         <div class="collapse navbar-collapse">
@@ -64,7 +69,7 @@
       <a ui-sref="tournament({id:notification.data.tournament.id})" class="btn btn-info">C'est partit !</a>
     </div>
 
-    <div ui-view></div>
+    <div ng-controller="indexCtrl" ui-view></div>
 
     <footer class=container-fluid>
       <div class="container">

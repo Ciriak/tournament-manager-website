@@ -18,69 +18,58 @@
     </div>
 
     <ul class="list-group">
-      <li class="list-group-item clearfix">
-        <i class="mdi mdi-trophy"></i> Cras justo odio
+      <li class="list-group-item clearfix" ng-repeat="tournament in tournaments.current">
+        <i class="mdi mdi-trophy"></i> {{tournament.name}}
         <span class="pull-right" data-toggle="tooltip" data-placement="top" title="Voir ce tournois">
-          <button class="btn btn-sm btn-info">
+          <a class="btn btn-sm btn-primary" ui-sref="tournaments({id : tournament.id})">
             <i class="mdi mdi-arrow-right-drop-circle"></i>
-          </button>
+          </a>
         </span>
       </li>
-      <li class="list-group-item clearfix">
-        <i class="mdi mdi-trophy"></i> Cras justo odio
+      <li class="list-group-item clearfix" ng-repeat="tournament in tournaments.last">
+        <i class="mdi mdi-trophy"></i> {{tournament.name}}
         <span class="pull-right" data-toggle="tooltip" data-placement="top" title="Voir ce tournois">
-          <button class="btn btn-sm btn-info">
+          <a class="btn btn-sm btn-info" ui-sref="tournaments({id : tournament.id})">
             <i class="mdi mdi-arrow-right-drop-circle"></i>
-          </button>
-        </span>
-      </li>
-      <li class="list-group-item clearfix">
-        <i class="mdi mdi-trophy"></i> Cras justo odio
-        <span class="pull-right" data-toggle="tooltip" data-placement="top" title="Voir ce tournois">
-          <button class="btn btn-sm btn-info">
-            <i class="mdi mdi-arrow-right-drop-circle"></i>
-          </button>
-        </span>
-      </li>
-      <li class="list-group-item clearfix">
-        <i class="mdi mdi-trophy"></i> Cras justo odio
-        <span class="pull-right" data-toggle="tooltip" data-placement="top" title="Voir ce tournois">
-          <button class="btn btn-sm btn-info">
-            <i class="mdi mdi-arrow-right-drop-circle"></i>
-          </button>
-        </span>
-      </li>
-      <li class="list-group-item clearfix">
-        <i class="mdi mdi-trophy"></i> Cras justo odio
-        <span class="pull-right">
-          <button class="btn btn-sm btn-primary">
-            <i class="mdi mdi-file-document-box"></i>
-          </button>
+          </a>
         </span>
       </li>
     </ul>
   </div>
 
   <div class="col-md-4">
-    Top 3 players
-  </div>
-</div>
+    <h4>Top joueurs</h4>
 
-<div class="container">
-  <h3>Tournois à venir...</h3>
-  <div class="panel panel-default col-md-4">
-    <div class="panel-body">
-      Basic panel example
+    <div class="alert alert-info" ng-if="!me">
+      <a ui-sref="login">Connectez-vous</a> pour voir le classement
     </div>
-  </div>
-  <div class="panel panel-default col-md-4">
-    <div class="panel-body">
-      Basic panel example
-    </div>
-  </div>
-  <div class="panel panel-default col-md-4">
-    <div class="panel-body">
-      Basic panel example
-    </div>
+
+    <table class="table table-hover" ng-if="me">
+      <thead>
+        <tr>
+          <td>
+            Pseudonyme
+          </td>
+          <td>
+            Niveau
+          </td>
+          <td>
+          <!-- options -->
+          </td>
+        </tr>
+      </thead>
+      <tr ng-repeat="profil in topUsers">
+        <td>
+          {{profil.nickname}} <span class="label label-info" ng-if="me.id === profil.id" title="C'est vous !"><i class="mdi mdi-account"></i></span>
+        </td>
+        <td>
+          <span class="badge">{{profil.level.level}}</span>
+        </td>
+        <td>
+          <a ui-sref="profil({id:profil.id})" class="btn btn-info btn-sm">Voir <i class="mdi mdi-account"></i></a>
+        </td>
+      </tr>
+    </table>
+
   </div>
 </div>
