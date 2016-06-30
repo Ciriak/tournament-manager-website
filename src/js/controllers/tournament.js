@@ -57,12 +57,13 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
     $scope.setReady = function(){
       $http({
         method: 'POST',
-        url: $rootScope.apiAddress+'/battle//ready',
+        url: $rootScope.apiAddress+'/battle/'+$scope.currentBattle.id+'/ready',
         data : $scope.me
       }).then(function successCallback(r) {
-
+        $(".battle-alert").fadeOut();
       }, function errorCallback(r) {
-
+        console.log("Error while try to set ready");
+        console.log(r);
       });
     };
 
@@ -83,9 +84,9 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
     //retreive the tournament battle list
     $http({
       method: 'GET',
-      url: $rootScope.apiAddress+'/tournaments/'+$state.params.id+'/currentBattle?access_token=' + $rootScope.access_token
+      url: $rootScope.apiAddress+'/tournaments/'+$state.params.id+'/current/battle?access_token=' + $rootScope.access_token
     }).then(function successCallback(r) {
-
+      $scope.currentBattle = r.data[0];
     });
 
     console.log($scope.tournament);
