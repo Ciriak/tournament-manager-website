@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-8">
     <h4>Commentaires</h4>
     <form class="row" ng-submit="comment.post()" ng-if="me">
       <div class="alert alert-danger" ng-show="comment.error">
@@ -35,7 +35,7 @@
       </div>
       <textarea rows="2" cols="40" placeholder="Entrez un commentaire" class="form-control" ng-model="comment.message" ng-disabled="comment.processing" required></textarea>
       <div class="text-right">
-          <button type="submit" class="btn btn-info" ng-disabled="comment.processing">Poster</button>
+          <button type="submit" style="margin:10px;" class="btn btn-info" ng-disabled="comment.processing">Poster</button>
       </div>
     </form>
 
