@@ -14,6 +14,8 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
     url: $rootScope.apiAddress+'/tournaments/'+$state.params.id+'?access_token=' + $rootScope.access_token
   }).then(function successCallback(r) {
     $scope.tournament = r.data;
+    console.log("TOURNAMENT");
+    console.log(r.data);
     $scope.tournament.players_count = $scope.tournament.accounts.length;
 
     var i = _.findLastIndex($scope.tournament.accounts, { 'id': $scope.me.id });
@@ -44,7 +46,7 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
     $scope.unsuscribe = function(){
       $http({
         method: 'DELETE',
-        url: $rootScope.apiAddress+'/tournament/'+$state.params.id+'/unsubscribe',
+        url: $rootScope.apiAddress+'/tournament/'+$state.params.id+'/unsubscribe?access_token='+ $rootScope.access_token,
         data : $scope.me
       }).then(function successCallback(r) {
         console.log("Unsuscribed");
@@ -57,12 +59,25 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
     $scope.setReady = function(){
       $http({
         method: 'POST',
-        url: $rootScope.apiAddress+'/battle/'+$scope.currentBattle.id+'/ready',
+        url: $rootScope.apiAddress+'/battle/'+$scope.currentBattle.id+'/ready?access_token='+ $rootScope.access_token,
         data : $scope.me
       }).then(function successCallback(r) {
         $(".battle-alert").fadeOut();
       }, function errorCallback(r) {
         console.log("Error while try to set ready");
+        console.log(r);
+      });
+    };
+
+    $scope.setWin = function(){
+      $http({
+        method: 'POST',
+        url: $rootScope.apiAddress+'/battle/'+$scope.currentBattle.id+'/win?access_token='+ $rootScope.access_token,
+        data : $scope.me
+      }).then(function successCallback(r) {
+        $(".battle-alert").fadeOut();
+      }, function errorCallback(r) {
+        console.log("Error while try to set win");
         console.log(r);
       });
     };
@@ -86,7 +101,11 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
       method: 'GET',
       url: $rootScope.apiAddress+'/tournaments/'+$state.params.id+'/current/battle?access_token=' + $rootScope.access_token
     }).then(function successCallback(r) {
-      $scope.currentBattle = r.data[0];
+      console.log("Current battle receive");
+      if(r.data[0] !== undefined){
+        $scope.currentBattle = r.data[0];
+      }
+
     });
 
     console.log($scope.tournament);
