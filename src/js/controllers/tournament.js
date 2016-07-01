@@ -23,7 +23,7 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
       console.log("I am an admin");
       $scope.tournamentOpt.isAdmin = true;
       //the tournament is full and can be generated
-      if($scope.tournament.players_count === $scope.tournament.player_max && $scope.tournament.state !== "Verouillé"){
+      if($scope.tournament.players_count === $scope.tournament.player_max && $scope.tournament.state !== "Verrouillé"){
         console.log("Tournament is full, can be generated");
         $scope.tournamentOpt.canGenerate = true;
       }
@@ -75,7 +75,7 @@ app.controller('tournamentCtrl', ['$scope', '$http','$rootScope','$location','$s
       $scope.tournament.battles = r.data;
       console.log("Battles :");
       console.log(r.data);
-      if($scope.tournament.state === "Verouillé"){
+      if($scope.tournament.state === "Verrouillé"){
         generateBracket($scope.tournament);
       }
     });
